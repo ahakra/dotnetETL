@@ -1,0 +1,33 @@
+version: '3.8'  # Use the appropriate version of Docker Compose
+
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu   # Use the latest version of the official sql image from Docker Hub
+    container_name: sql-CQRS  # Give your container a custom name
+    ports:
+      - "1433:1433"  # Map container port 27017 to host port 27017 (sql default port)
+    volumes: 
+          - sqlsystem:/var/opt/mssql/
+          - sqldata:/var/opt/sqlserver/data
+          - sqllog:/var/opt/sqlserver/log
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_USER: sa
+      SA_PASSWORD: P@ssw0rd  # sql root username
+      MSSQL_PID: Express  # sql root password (change to a secure password)
+    #command: mongod --auth  # Enable sql authentication
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+
+volumes:
+  volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
+  
+networks:
+  default:
+    external:
+      name: mydockernetwork
