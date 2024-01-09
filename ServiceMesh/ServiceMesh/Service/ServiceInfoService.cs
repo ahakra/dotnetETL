@@ -2,6 +2,8 @@ using AutoMapper;
 using ServiceMesh.Contracts;
 using ServiceMesh.Contracts.Service;
 using ServiceMesh.Entities;
+using System.Diagnostics;
+using ServiceMesh;
 
 namespace ServiceMesh.Service
 {
@@ -17,17 +19,20 @@ namespace ServiceMesh.Service
 
         public IEnumerable<ServiceInfo> GetAllServiceInfo(bool trackChanges)
         {
-            try
-            {
-                var serviceInfoEntities = _repository.ServiceInfo.GetAllServiceInfo(trackChanges);
-                var serviceInfo = _mapper.Map<IEnumerable<ServiceInfo>>(serviceInfoEntities);
+            
 
-                return serviceInfo;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                    try
+                    {
+                        var serviceInfoEntities = _repository.ServiceInfo.GetAllServiceInfo(trackChanges);
+                        var serviceInfo = _mapper.Map<IEnumerable<ServiceInfo>>(serviceInfoEntities);
+
+                        return serviceInfo;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+
         }
 
         public IEnumerable<ServiceInfo> GetByType(serviceType serviceType, bool trackChanges)

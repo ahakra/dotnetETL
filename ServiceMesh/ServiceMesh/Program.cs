@@ -1,9 +1,11 @@
+using System.Diagnostics;
 using ServiceMesh.GrpcServices;
 using ServiceMesh.RepositoryContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceMesh.Extnesions;
+using ServiceMesh.Service;
 
 namespace ServiceMesh {
     public class Program
@@ -26,7 +28,14 @@ namespace ServiceMesh {
            // builder.Services.AddDbContext<ServiceMeshDbContext>();
             builder.Services.ConfigureSqlContext(builder.Configuration);
             builder.Services.AddAutoMapper(typeof(Program));
+
+            builder.Services.ConfigureOpenTelemtryTrace("serviceMesh");
+
             var app = builder.Build();
+            
+            using var zz = new Activity("meshservice");
+
+            zz.AddTag("aa","zz");
 
             // Configure the HTTP request pipeline.
             app.MapGrpcService<ServiceRegistererService>();
