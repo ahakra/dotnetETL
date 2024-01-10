@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceMesh.Extnesions;
 using ServiceMesh.Service;
+using System.Runtime.InteropServices;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Exporter.Zipkin;
 
 namespace ServiceMesh {
     public class Program
@@ -15,12 +19,9 @@ namespace ServiceMesh {
 
 
 
+
             var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             var builder = WebApplication.CreateBuilder(args);
-
-            // Additional configuration is required to successfully run gRPC on macOS.
-            // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
-
 
             builder.Services.AddGrpc();
             builder.Services.ConfigureRepositoryManager();
@@ -33,10 +34,6 @@ namespace ServiceMesh {
 
             var app = builder.Build();
             
-            using var zz = new Activity("meshservice");
-
-            zz.AddTag("aa","zz");
-
             // Configure the HTTP request pipeline.
             app.MapGrpcService<ServiceRegistererService>();
            // app.MapGrpcService<ServiceGetterService>();
