@@ -7,6 +7,6 @@ containers:
 
 
 buildEntities:
-	dotnet build SharedEntities/SharedEntities.sln --configuration Release  --output sharedEntitiesDll
+	dotnet build SharedEntities/SharedEntities.sln --configuration Release  --output DLL/sharedEntitiesDll
 
 
