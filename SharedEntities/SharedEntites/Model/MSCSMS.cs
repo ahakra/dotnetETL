@@ -1,6 +1,6 @@
 namespace SharedEntites.Model;
 
-public class MSCVoiceEntity {
+public class MSSMSEntity{
     
     
     public string CallingNumber { get; set; }
