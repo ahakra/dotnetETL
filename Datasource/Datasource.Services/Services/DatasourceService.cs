@@ -5,43 +5,44 @@ using MongoDB.Driver;
 
 namespace DataSource.Services.Services;
 public class DatasourceService:IDatasourceService {
+
     private readonly IRepositoryManager _repository;
 
-public DatasourceService(IRepositoryManager repository) {
-    _repository = repository;
+    public DatasourceService(IRepositoryManager repository) {
+        _repository = repository;
 
-}
-public Task<IEnumerable<DatasourceEntity>> GetAllDatasources()
-{
-    try
-    {
-        var datasources =  _repository.DatasourceRepository.GetAllDatasources();
-        Console.WriteLine("Successfully retrieved all datasources.");
-        return datasources;
     }
-    catch (Exception ex)
+    public Task<IEnumerable<DatasourceEntity>> GetAllDatasources()
     {
-        Console.WriteLine( "Error while retrieving datasources." + ex);
-        throw;
+        try
+        {
+            var datasources =  _repository.DatasourceRepository.GetAllDatasources();
+            Console.WriteLine("Successfully retrieved all datasources.");
+            return datasources;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine( "Error while retrieving datasources." + ex);
+            throw;
+        }
     }
-}
 
-public async Task<DatasourceEntity>  InsertDatasource(DatasourceEntity datasourceEntity)
-{
-    try
+    public async Task<DatasourceEntity>  InsertDatasource(DatasourceEntity datasourceEntity)
     {
-        return await _repository.DatasourceRepository.InsertDatasource(datasourceEntity);
+        try
+        {
+            return await _repository.DatasourceRepository.InsertDatasource(datasourceEntity);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine( "Error while retrieving datasources services." );
+            throw;
+        }
     }
-    catch (Exception ex)
+    public async Task<bool> DeleteDatasource(string datasourceId)
     {
-        Console.WriteLine( "Error while retrieving datasources services." );
-        throw;
+        var objectId = new ObjectId(datasourceId);
+        var deleteResult = await _repository.DatasourceRepository.DeleteOneAsync(objectId);
+        return deleteResult > 0;
     }
-}
-public async Task<bool> DeleteDatasource(string datasourceId)
-{
-    var objectId = new ObjectId(datasourceId);
-    var deleteResult = await _repository.DatasourceRepository.DeleteOneAsync(objectId);
-    return deleteResult > 0;
-}
 }
