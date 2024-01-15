@@ -13,7 +13,7 @@ public class DatasourceBackgroundService :BackgroundService{
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                Console.WriteLine("Background service is running...");
+                //Console.WriteLine("Background service is running...");
 
                 // Your background service logic goes here
 
