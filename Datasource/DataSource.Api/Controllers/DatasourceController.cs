@@ -44,13 +44,37 @@ public class DatasourceController: ControllerBase {
         }
         try
         {
-            _service.DatasourceService.InsertDatasource(datasource);
-            return Ok();
+         var insertedDatasource = await _service.DatasourceService.InsertDatasource(datasource);
+         return StatusCode(200,  insertedDatasource);
+
         }
         catch (Exception ex)
         {
             Console.WriteLine( "Error while inserting datasources." + ex);
             return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDatasource(string id)
+    {
+        try
+        {
+            var isDeleted = await _service.DatasourceService.DeleteDatasource(id);
+
+            if (isDeleted)
+            {
+                return NoContent(); // 204 No Content if the document was successfully deleted
+            }
+            else
+            {
+                return NotFound(); // 404 Not Found if the document with the specified id was not found
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions and return an appropriate response
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
         }
     }
 }

@@ -1,5 +1,7 @@
 using DataSource.Contracts;
 using DataSource.Entities;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace DataSource.Services.Services;
 public class DatasourceService:IDatasourceService {
@@ -14,35 +16,32 @@ public Task<IEnumerable<DatasourceEntity>> GetAllDatasources()
     try
     {
         var datasources =  _repository.DatasourceRepository.GetAllDatasources();
-
-        // Log successful retrieval
         Console.WriteLine("Successfully retrieved all datasources.");
-        
         return datasources;
     }
     catch (Exception ex)
     {
-        // Log the exception
         Console.WriteLine( "Error while retrieving datasources." + ex);
-
-            // Rethrow the exception or handle it as needed
-            throw;
+        throw;
     }
 }
 
-public   void InsertDatasource(DatasourceEntity datasourceEntity)
+public async Task<DatasourceEntity>  InsertDatasource(DatasourceEntity datasourceEntity)
 {
     try
     {
-        _repository.DatasourceRepository.InsertDatasource(datasourceEntity);  
+        return await _repository.DatasourceRepository.InsertDatasource(datasourceEntity);
     }
     catch (Exception ex)
     {
-        // Log the exception
         Console.WriteLine( "Error while retrieving datasources services." );
-
-        // Rethrow the exception or handle it as needed
         throw;
     }
+}
+public async Task<bool> DeleteDatasource(string datasourceId)
+{
+    var objectId = new ObjectId(datasourceId);
+    var deleteResult = await _repository.DatasourceRepository.DeleteOneAsync(objectId);
+    return deleteResult > 0;
 }
 }

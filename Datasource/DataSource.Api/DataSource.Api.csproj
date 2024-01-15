@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataSource.Contracts\DataSource.Contracts.csproj" />
-    <ProjectReference Include="..\Datasource.Services\Datasource.Services.csproj" />
+    <ProjectReference Include="../DataSource.Contracts/DataSource.Contracts.csproj" />
+    <ProjectReference Include="../Datasource.Services/Datasource.Services.csproj" />
   </ItemGroup>
 
 

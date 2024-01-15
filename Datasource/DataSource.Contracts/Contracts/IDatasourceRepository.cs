@@ -1,7 +1,10 @@
 using DataSource.Entities;
+using MongoDB.Bson;
 namespace DataSource.Contracts;
+
 
 public interface IDatasourceRepository {
     Task<IEnumerable<DatasourceEntity>> GetAllDatasources();
-    void InsertDatasource(DatasourceEntity datasourceEntity);
+    Task<DatasourceEntity> InsertDatasource(DatasourceEntity datasourceEntity);
+    Task<int> DeleteOneAsync(ObjectId objectId);
 }

@@ -7,20 +7,7 @@ using MongoDB.Driver;
 namespace DataSource.Repository;
 
 public class DatasourceRepository:MongoRepositoryBase<DatasourceEntity>,IDatasourceRepository {
-    static bool PingDatabase(IMongoDatabase database)
-    {
-        try
-        {
-            // Ping the server to check the connection
-            database.RunCommand((Command<BsonDocument>)"{ ping: 1 }");
-            return true;
-        }
-        catch (MongoConnectionException)
-        {
-            // Exception occurred, indicating a connection issue
-            return false;
-        }
-    }
+
     public DatasourceRepository(IOptions<DatasourceDatabaseSettings> settings)
     {
         var client = new MongoClient(settings.Value.ConnectionString);
@@ -31,35 +18,40 @@ public class DatasourceRepository:MongoRepositoryBase<DatasourceEntity>,IDatasou
     
     public Task<IEnumerable<DatasourceEntity>> GetAllDatasources()
     {
-
-
       try
-            {
-                var datasources =  GetAll();
-                return datasources;
-            }
-       catch (Exception ex)
-       {
+      {
+          var datasources =  GetAll();
+          return datasources;
+      }
+      catch (Exception ex)
+      {
            // Log the exception or handle it as needed
            Console.WriteLine( "Error while retrieving datasources." + ex);
-
-// Rethrow the exception or return a default value, depending on your needs
-throw;
-       }
+           throw;
+      }
     }
-    
-    public void InsertDatasource(DatasourceEntity datasourceEntity)
+
+    public async Task<DatasourceEntity> InsertDatasource(DatasourceEntity datasourceEntity)
     {
         try
         {
-            InsertDatasource(datasourceEntity);
+           return  await Insert(datasourceEntity);
         }
         catch (Exception ex)
         {
-            // Log the exception or handle it as needed
             Console.WriteLine( "Error while retrieving datasources repo" );
-
-            // Rethrow the exception or return a default value, depending on your needs
+            throw;
+        }
+    }
+    public async Task<int> DeleteOneAsync(ObjectId objectId)
+    {
+        try
+        {
+            return  await Delete(objectId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine( "Error while deleting datasources repo" );
             throw;
         }
     }

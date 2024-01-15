@@ -19,10 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataSource.Api\DataSource.Api.csproj" />
-    <ProjectReference Include="..\DataSource.Contracts\DataSource.Contracts.csproj" />
-    <ProjectReference Include="..\Datasource.Services\Datasource.Services.csproj" />
-    <ProjectReference Include="..\DataSource.Entities\DataSource.Entities.csproj" />
+    <ProjectReference Include="../DataSource.Api/DataSource.Api.csproj" />
+    <ProjectReference Include="../DataSource.Contracts/DataSource.Contracts.csproj" />
+    <ProjectReference Include="../Datasource.Services/Datasource.Services.csproj" />
+    <ProjectReference Include="../DataSource.Entities/DataSource.Entities.csproj" />
   </ItemGroup>
 
 </Project>

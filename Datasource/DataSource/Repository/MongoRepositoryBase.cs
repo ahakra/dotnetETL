@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using DataSource.Contracts;
+using DataSource.Entities;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 
@@ -19,9 +20,10 @@ public class MongoRepositoryBase<T> : IRepositoryBase<T>
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async Task Insert(T entity)
+        public async Task<T>  Insert(T entity)
         {
             await _collection.InsertOneAsync(entity);
+            return entity;
         }
 
         public async Task Update(ObjectId id, T entity)
@@ -30,10 +32,11 @@ public class MongoRepositoryBase<T> : IRepositoryBase<T>
             await _collection.ReplaceOneAsync(filter, entity);
         }
 
-        public async Task Delete(ObjectId id)
+        public async Task<int> Delete(ObjectId id)
         {
-            var filter = Builders<T>.Filter.Eq("_id", id);
-            await _collection.DeleteOneAsync(filter);
+           var filter = Builders<T>.Filter.Eq("_id", id);
+           var result = await _collection.DeleteOneAsync(filter);
+           return (int)result.DeletedCount;
         }
     }
     
