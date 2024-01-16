@@ -1,6 +1,7 @@
 using Grpc.Net.Client;
 using ServiceMesh;
 using DataSource.BackgroundServices.Entities;
+using DataSource.BackgroundServices.Contracts;
 using Microsoft.Extensions.Options;
 
 namespace DataSource.BackgroundServices;
@@ -10,7 +11,7 @@ public class DatasourceManagerBackgroundService :BackgroundService{
         private   GrpcChannel _channel{get;}
         private   ServiceRegisterer.ServiceRegistererClient _client{get;}
         private ServiceInfo _serviceInfo {get;set;}
-        private readonly DataSourceManagerInitializer _dataSourceManagerInitializer;
+        private readonly IDatasourceInitiliazer _dataSourceManagerInitializer;
 
         public bool isReady {get;set;} = false;
         public bool isRegistered {get;set;} = false;
