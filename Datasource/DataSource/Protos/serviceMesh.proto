@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option csharp_namespace = "ServiceMesh";
+
+package serviceMesh;
+import "google/protobuf/timestamp.proto";
+
+service ServiceRegisterer {
+  rpc RegisterService (ServiceInfo) returns (ResponseMessage);
+  rpc UpdateService (ServiceId) returns (ResponseMessage);
+  rpc DeleteService (ServiceId) returns (ResponseMessage);
+  rpc GetAll (EmptyMessage) returns (ServicesAvailable);
+	rpc GetByType(serviceType) returns (ServicesAvailable);
+}
+
+
+service ServiceGetter {
+
+}
+
+message ServiceInfo {
+  string Id = 1;
+  string ServiceType = 2;
+  google.protobuf.Timestamp Timestamp = 3;
+  repeated ServiceAdapter Adapters = 4;
+}
+
+message ServiceAdapter {
+  string Id =1;
+  string Address = 2;
+  ProtocolUsed ProtocolUsed = 3;
+  string ProtocolDescription = 4;
+  string ServiceInfoId = 5;
+}
+
+message ServiceId {
+  string Id = 1;
+}
+
+message serviceType {
+  string type = 1;
+}
+message ResponseMessage {
+	ResponseEnum message =1;
+}
+
+enum ResponseEnum{
+	SUCCESSFUL = 0;
+	FAILED = 1;
+}
+message EmptyMessage{}
+
+message ServicesAvailable {
+  repeated ServiceInfo services = 1;
+}
+
+enum ProtocolUsed {
+  WEB_API = 0;
+  GRPC = 1;
+  KAFKA = 2;
+}
+

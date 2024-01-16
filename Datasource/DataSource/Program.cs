@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
+using Grpc.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
@@ -24,6 +25,7 @@ builder.Services.Configure<DatasourceDatabaseSettings>(
 builder.Services.AddHostedService<DatasourceBackgroundService>();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
+
 builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;

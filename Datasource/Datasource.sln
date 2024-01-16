@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datasource.Services", "Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSource.Entities", "DataSource.Entities\DataSource.Entities.csproj", "{B76897AA-E9DB-4D7C-A216-7913E28751C5}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,5 +47,9 @@ Global
 		{B76897AA-E9DB-4D7C-A216-7913E28751C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B76897AA-E9DB-4D7C-A216-7913E28751C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B76897AA-E9DB-4D7C-A216-7913E28751C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49C3A3C7-3492-4D57-96C5-F3D378E1DED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49C3A3C7-3492-4D57-96C5-F3D378E1DED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49C3A3C7-3492-4D57-96C5-F3D378E1DED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49C3A3C7-3492-4D57-96C5-F3D378E1DED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
