@@ -63,7 +63,7 @@ public class DatasourceBackgroundService :BackgroundService{
                     _client.UpdateService(new ServiceId(){Id = _serviceInfo.Id});
                     Console.WriteLine("updating datasource manager");
                 }
-                Console.WriteLine(_client.GetAll(new EmptyMessage()).Services);
+              
                 await Task.Delay(5000, stoppingToken); // Simulate some work, e.g., check for updates every 5 seconds
             }
         }

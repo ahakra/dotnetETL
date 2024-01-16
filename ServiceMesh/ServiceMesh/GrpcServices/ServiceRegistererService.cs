@@ -55,7 +55,7 @@ namespace ServiceMesh.GrpcServices
                         }
                         catch(Exception e)
                         {
-
+                                Console.WriteLine(e);
                                 return Task.FromResult(new ServicesAvailable { });
                         }
 

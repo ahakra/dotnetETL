@@ -2,7 +2,7 @@
 public enum ProtocolUsedEnum
 {
     // Add values based on your actual protocols
-    HTTP = 1,
-    gRPC = 2,
-    Kafka = 3
+    HTTP = 0,
+    gRPC = 1,
+    Kafka = 2
 }
