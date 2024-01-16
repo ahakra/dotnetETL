@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using DataSource.BackgroundServices;
+using DataSource.BackgroundServices.Entities;
 using DataSource.Entities;
 using DataSource.Extnesions;
 using Microsoft.Extensions.Hosting;
@@ -21,8 +22,10 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.Configure<DatasourceDatabaseSettings>(
     builder.Configuration.GetSection("DatasourcestoreDatabase"));
 
+builder.Services.Configure<DataSourceManagerInitializer>(
+    builder.Configuration.GetSection("DataSourceManagerIntializer"));
 
-builder.Services.AddHostedService<DatasourceBackgroundService>();
+builder.Services.AddHostedService<DatasourceManagerBackgroundService>();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 
