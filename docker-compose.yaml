@@ -16,10 +16,10 @@ services:
       SA_PASSWORD: P@ssw0rd  # sql root username
       MSSQL_PID: Express  # sql root password (change to a secure password)
     #command: mongod --auth  # Enable sql authentication
-  adminer:
-    image: adminer
-    ports:
-      - "8080:8080"
+#  adminer:
+#    image: adminer
+#    ports:
+#      - "8080:8080"
   zipkin:
     image: openzipkin/zipkin:latest
     container_name: zipkin
